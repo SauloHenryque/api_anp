@@ -2,7 +2,7 @@
 
 ## **Arquitetura**
 
-**Nome da Tag:** user
+**Nome da Tag:** usuario
 
 **Path:** PUT /api/user/{id}
 

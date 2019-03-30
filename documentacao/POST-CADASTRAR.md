@@ -1,4 +1,4 @@
-#**Descrição:** Cadastra user.
+#**Descrição:** Cadastra usuario.
 
 **Description (en-US):** Save user.
 
@@ -63,7 +63,7 @@
 
 ## **Documentos e referência**
 
-**Tabelas:** user
+**Tabelas:** usuario
 
 ## **Detalhes de implementação**
 
