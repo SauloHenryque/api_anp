@@ -80,10 +80,10 @@ public class UserResource {
 		
 		@PostMapping("/importar-arquivo")
 		public String importarArquivo (@RequestPart("arquivo_excel") MultipartFile files) throws IOException {
-			
+
 			InputStream teste = files.getInputStream();
 			BufferedReader br = new BufferedReader(new InputStreamReader(teste, "UTF8")); 
-			Iterable<CSVRecord> parser = CSVFormat.EXCEL.withDelimiter('\n').withFirstRecordAsHeader().parse(br);
+			Iterable<CSVRecord> parser = CSVFormat.DEFAULT.withDelimiter(' ').withFirstRecordAsHeader().parse(br);
 			
 			 for (CSVRecord record:parser) {
 				 	String produto= record.get("produto");
