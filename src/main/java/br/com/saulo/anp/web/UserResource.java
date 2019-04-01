@@ -1,7 +1,16 @@
 package br.com.saulo.anp.web;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.Map;
+
 import javax.validation.Valid;
 
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVParser;
+import org.apache.commons.csv.CSVRecord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -13,7 +22,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import br.com.saulo.anp.dto.persists.UserPersist;
 import br.com.saulo.anp.dto.request.UserRequest;
@@ -67,7 +78,20 @@ public class UserResource {
 	        return ResponseEntity.ok(HttpStatus.OK);
 	    }
 		
-//		@PostMapping("/arquivo")
-//		public 
+		@PostMapping("/importar-arquivo")
+		public String importarArquivo (@RequestPart("arquivo_excel") MultipartFile files) throws IOException {
+			
+			InputStream teste = files.getInputStream();
+			BufferedReader br = new BufferedReader(new InputStreamReader(teste, "UTF8")); 
+			Iterable<CSVRecord> parser = CSVFormat.DEFAULT.withFirstRecordAsHeader().parse(br);
+			
+			 for (CSVRecord record:parser) {
+				 	String produto= record.get("produto");
+				 	String valor= record.get("valor");
+		     }
+
+			return null;
+			
+		}
 
 }
