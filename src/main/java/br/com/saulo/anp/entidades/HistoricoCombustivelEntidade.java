@@ -1,6 +1,8 @@
 package br.com.saulo.anp.entidades;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -61,13 +63,13 @@ public class HistoricoCombustivelEntidade implements Serializable {
     private String produto;
     
     @Column(name = "DATA_COLETA")
-    private String data_coleta;
+    private LocalDate data_coleta;
     
     @Column(name = "VALOR_COMPRA")
-    private String valor_compra;
+    private BigDecimal valor_compra;
     
     @Column(name = "VALOR_VENDA")
-    private String valor_venda;
+    private BigDecimal valor_venda;
     
     @Column(name = "UNIDADE")
     private String unidade;

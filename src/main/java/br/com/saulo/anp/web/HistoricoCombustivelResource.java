@@ -1,16 +1,7 @@
 package br.com.saulo.anp.web;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.Map;
-
 import javax.validation.Valid;
 
-import org.apache.commons.csv.CSVFormat;
-import org.apache.commons.csv.CSVParser;
-import org.apache.commons.csv.CSVRecord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -26,13 +17,11 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import br.com.saulo.anp.dto.persists.UserPersist;
-import br.com.saulo.anp.dto.request.UserRequest;
-import br.com.saulo.anp.dto.responses.UserResponse;
+import br.com.saulo.anp.dto.persists.HistoricoCombustivelPersist;
+import br.com.saulo.anp.dto.request.HistoricoCombustivelRequest;
+import br.com.saulo.anp.dto.responses.HistoricoCombustivelResponse;
 import br.com.saulo.anp.entidades.HistoricoCombustivelEntidade;
-import br.com.saulo.anp.entidades.UserEntidade;
 import br.com.saulo.anp.servicos.HistoricoCombustivelServico;
-import br.com.saulo.anp.servicos.UserServico;
 import br.com.saulo.anp.ultil.GenericConvert;
 import io.swagger.annotations.Api;
 
@@ -69,7 +58,7 @@ public class HistoricoCombustivelResource {
 		@GetMapping
 	    public ResponseEntity<?> listar(@Valid HistoricoCombustivelRequest historicoCombustivelRequest) {
 			
-			HistoricoCombustivelEntidade historicoCombustivelEntidade = GenericConvert.convertModelMapper(lojaRequest, UserEntidade.class);	
+			HistoricoCombustivelEntidade historicoCombustivelEntidade = GenericConvert.convertModelMapper(historicoCombustivelRequest, HistoricoCombustivelEntidade.class);	
 			return ResponseEntity.status(HttpStatus.OK).body(historicoCombustivelServico.listarHistoricoCombustivel(historicoCombustivelEntidade));
 	    }
 		
@@ -83,7 +72,7 @@ public class HistoricoCombustivelResource {
 		@PostMapping("/importar-arquivo")
 		public ResponseEntity<?> importarArquivo (@RequestPart("arquivo_excel") MultipartFile files) {
 
-			historicoCombustivelServico.importarHistoricoCombustivel(files);
+//			historicoCombustivelServico.importarHistoricoCombustivel(files);
 			
 			return ResponseEntity.ok(HttpStatus.OK);
 			
