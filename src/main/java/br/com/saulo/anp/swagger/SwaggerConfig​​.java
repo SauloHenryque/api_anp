@@ -26,7 +26,7 @@ public class SwaggerConfig​​ {
 	 
 	private ApiInfo apiInfo() {
 		
-		return new ApiInfoBuilder().title("Swagger Usuario")
+		return new ApiInfoBuilder().title("Swagger ANP")
 				.description("Documentação da API de acesso aos endpoints da ANP")
 				.version("1.0")
 				.build();

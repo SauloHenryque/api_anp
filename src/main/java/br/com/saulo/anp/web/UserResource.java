@@ -83,7 +83,7 @@ public class UserResource {
 
 			InputStream teste = files.getInputStream();
 			BufferedReader br = new BufferedReader(new InputStreamReader(teste, "UTF8")); 
-			Iterable<CSVRecord> parser = CSVFormat.DEFAULT.withDelimiter(' ').withFirstRecordAsHeader().parse(br);
+			Iterable<CSVRecord> parser = CSVFormat.DEFAULT.withDelimiter(';').withFirstRecordAsHeader().parse(br);
 			
 			 for (CSVRecord record:parser) {
 				 	String produto= record.get("produto");
