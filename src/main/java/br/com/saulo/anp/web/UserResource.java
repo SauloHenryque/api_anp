@@ -4,12 +4,11 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.Map;
+import java.lang.reflect.InvocationTargetException;
 
 import javax.validation.Valid;
 
 import org.apache.commons.csv.CSVFormat;
-import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,8 +29,10 @@ import br.com.saulo.anp.dto.persists.UserPersist;
 import br.com.saulo.anp.dto.request.UserRequest;
 import br.com.saulo.anp.dto.responses.UserResponse;
 import br.com.saulo.anp.entidades.UserEntidade;
+import br.com.saulo.anp.importacao.ImportarArquivoCSV;
 import br.com.saulo.anp.servicos.UserServico;
 import br.com.saulo.anp.ultil.GenericConvert;
+import br.com.saulo.anp.ultil.InvokeMetodoClasse;
 import io.swagger.annotations.Api;
 
 @RestController
@@ -43,8 +44,10 @@ public class UserResource {
 		private UserServico userServico;
 		
 	 	@PostMapping
-	    public ResponseEntity<?> salvar(@RequestBody @Valid UserPersist request) {
+	    public ResponseEntity<?> salvar(@RequestBody @Valid UserPersist request) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 
+	 		
+	 		InvokeMetodoClasse.retornarValorMetodo("regiao");
 			UserEntidade userEntidade   = GenericConvert.convertModelMapper(request, UserEntidade.class);
 			userEntidade 				= userServico.salvarUser(userEntidade);
 			UserResponse response 		= GenericConvert.convertModelMapper(userEntidade, UserResponse.class);
@@ -81,14 +84,17 @@ public class UserResource {
 		@PostMapping("/importar-arquivo")
 		public String importarArquivo (@RequestPart("arquivo_excel") MultipartFile files) throws IOException {
 
-			InputStream teste = files.getInputStream();
-			BufferedReader br = new BufferedReader(new InputStreamReader(teste, "UTF8")); 
-			Iterable<CSVRecord> parser = CSVFormat.DEFAULT.withDelimiter(';').withFirstRecordAsHeader().parse(br);
+			ImportarArquivoCSV teste = new ImportarArquivoCSV();
+			teste.lerArquivo(files);
 			
-			 for (CSVRecord record:parser) {
-				 	String produto= record.get("produto");
-				 	String valor= record.get("valor");
-		     }
+//			InputStream teste = files.getInputStream();
+//			BufferedReader br = new BufferedReader(new InputStreamReader(teste, "UTF8")); 
+//			Iterable<CSVRecord> parser = CSVFormat.DEFAULT.withDelimiter(';').withFirstRecordAsHeader().parse(br);
+			
+//			 for (CSVRecord record:parser) {
+//				 	String produto= record.get("produto");
+//				 	String valor= record.get("valor");
+//		     }
 
 			return null;
 			

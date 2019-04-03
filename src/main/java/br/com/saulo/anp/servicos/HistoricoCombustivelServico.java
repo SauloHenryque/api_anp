@@ -48,8 +48,8 @@ public class HistoricoCombustivelServico {
     public void deletarHistoricoCombustivel(long id) {
     	
 //		checkThrow(!historicoCombustivelRepositorio.existsById(id), REGISTRO_NAO_ENCONTRADO);
-    	HistoricoCombustivelEntidade historicoCombustivelEntidade = historicoCombustivelRepositorio.findById(id);
-    	historicoCombustivelRepositorio.delete(historicoCombustivelEntidade);
+//    	HistoricoCombustivelEntidade historicoCombustivelEntidade = historicoCombustivelRepositorio.findById(id);
+//    	historicoCombustivelRepositorio.delete(historicoCombustivelEntidade);
     }
 
 

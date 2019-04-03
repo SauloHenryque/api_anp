@@ -91,6 +91,15 @@ public class GenericConvert {
              return pageApi;
         }
    }
+    
+   public static String primeiraLetraMaiuscula(String palavra) {
+	   
+	   String palavraMaiuscula;
+	   palavraMaiuscula = palavra.toUpperCase();
+	   
+	   return palavraMaiuscula.substring(0,1) + palavra.substring (1);
+	   
+   }
 
 
 

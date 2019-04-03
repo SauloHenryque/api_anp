@@ -8,11 +8,11 @@ import br.com.saulo.anp.entidades.HistoricoCombustivelEntidade;
 @Repository
 public interface HistoricoCombustivelRepositorio extends JpaRepository<HistoricoCombustivelEntidade, Long> {
 
-	HistoricoCombustivelEntidade findById(long id);
+//	HistoricoCombustivelEntidade findById(long id);
 
-	boolean existsByEmail(String email);
+//	boolean existsByEmail(String email);
 
-	boolean existsByEmailAndIdNotIn(String email, Long id);
+//	boolean existsByEmailAndIdNotIn(String email, Long id);
 	
 
 }
