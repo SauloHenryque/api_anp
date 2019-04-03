@@ -29,9 +29,9 @@ public class InvokeMetodoClasse {
 	public static HistoricoCombustivelEntidade retornarHistoricoCombustivel(HistoricoCombustivelEntidade historicoCombustivelEntidade, String metodo, String valor) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		
 		String nomeMetodo = "set" + Ultil.primeiraLetraMaiuscula(metodo);
-		
+		historicoCombustivelEntidade.getClass().getMethods();
 		try {
-			Method metodoDoSeuObjeto = historicoCombustivelEntidade.getClass().getMethod(nomeMetodo, null );
+			Method metodoDoSeuObjeto = historicoCombustivelEntidade.getClass().getMethod(nomeMetodo,  new Class[]{String.class});
 			metodoDoSeuObjeto.invoke(historicoCombustivelEntidade, valor);
 			
 		} catch (NoSuchMethodException e) {

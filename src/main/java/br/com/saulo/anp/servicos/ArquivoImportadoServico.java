@@ -20,7 +20,7 @@ public class ArquivoImportadoServico {
 
 	public ArquivoImportadoEntidade salvarArquivo(ArquivoImportadoEntidade arquivoImportadoEntidade) {
 		
-		checkThrow(arquivoImportadoRepositorio.existsByNome(arquivoImportadoEntidade.getNome()), NOME_JA_CADASTRADO);
+//		checkThrow(arquivoImportadoRepositorio.existsByNome(arquivoImportadoEntidade.getNome()), NOME_JA_CADASTRADO);
         return arquivoImportadoRepositorio.save(arquivoImportadoEntidade);
 
 	}
