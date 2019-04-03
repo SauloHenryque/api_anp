@@ -16,24 +16,25 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.google.common.collect.Lists;
 
+import br.com.saulo.anp.entidades.HistoricoCombustivelEntidade;
 import br.com.saulo.anp.entidades.UserEntidade;
 import br.com.saulo.anp.exception.BadRequestException;
 import br.com.saulo.anp.exception.NotFoundException;
-import br.com.saulo.anp.repositorios.UserRepositorio;
-import br.com.saulo.anp.servicos.UserServico;
+import br.com.saulo.anp.repositorios.HistoricoCombustivelRepositorio;
+import br.com.saulo.anp.servicos.HistoricoCombustivelServico;
 import junit.framework.TestCase;
 
 @RunWith(SpringRunner.class)
-public class UserServicoTest {
+public class HistoricoCombustivelServicoTest {
  
 	 @InjectMocks
-     private UserServico userServicoMock;
+     private HistoricoCombustivelServico historicoCombustivelServicoMock;
 	
      @Mock
-     private UserRepositorio userRepositorio;
+     private HistoricoCombustivelRepositorio historicoCombustivelRepositorio;
      
      @Mock
-     private UserEntidade userEntidade;
+     private HistoricoCombustivelEntidade historicoCombustivelEntidade;
      
 
      @Before
@@ -43,20 +44,20 @@ public class UserServicoTest {
      }
      
      @Test
-     public void salvarUser(){
+     public void salvar(){
     	 
-    	 UserEntidade	userEntidadeNovo		 = new UserEntidade();
+    	 HistoricoCombustivelEntidade	historicoCombustivelEntidadeNovo		 = new HistoricoCombustivelEntidade();
     	 
-    	 userEntidadeNovo.setNome("Nome Teste");
-    	 userEntidadeNovo.setEmail("email@teste.com");
-    	 userEntidadeNovo.setPassword("13321344654");
+    	 historicoCombustivelEntidadeNovo.setNome("Nome Teste");
+    	 historicoCombustivelEntidadeNovo.setEmail("email@teste.com");
+    	 historicoCombustivelEntidadeNovo.setPassword("13321344654");
     	 
-         Mockito.when(userRepositorio.existsByEmail("Teste")).thenReturn(false);
-         Mockito.when(userRepositorio.save(Mockito.any(UserEntidade.class))).thenReturn(userEntidadeNovo);
+         Mockito.when(historicoCombustivelRepositorio.existsByEmail("Teste")).thenReturn(false);
+         Mockito.when(historicoCombustivelRepositorio.save(Mockito.any(UserEntidade.class))).thenReturn(historicoCombustivelEntidadeNovo);
 
-         UserEntidade userEntidadeCadastrado = userServicoMock.salvarUser(userEntidadeNovo);
+         HistoricoCombustivelEntidade historicoCombustivelEntidadeCadastrado = historicoCombustivelServicoMock.salvarHistoricoCombustivel(historicoCombustivelEntidadeNovo);
 
-         testCase(userEntidadeNovo, userEntidadeCadastrado);
+         testCase(historicoCombustivelEntidadeNovo, historicoCombustivelEntidadeCadastrado);
      }
      
      @Test(expected = BadRequestException.class)
