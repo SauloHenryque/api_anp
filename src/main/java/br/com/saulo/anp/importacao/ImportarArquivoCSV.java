@@ -6,7 +6,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,10 +20,9 @@ import br.com.saulo.anp.ultil.InvokeMetodoClasse;
 
 public class ImportarArquivoCSV implements ImportarArquivo{
 
+	@SuppressWarnings("null")
 	@Override
 	public List<HistoricoCombustivelEntidade> lerArquivo(MultipartFile files){
-		
-//		String listaHeader[] = {"Região - Sigla",  "Estado - Sigla", "Município", "Revenda", "Instalação - Código", "Produto", "Data da Coleta", "Valor de Compra", ""};
 		
 		Map<String,String> mapeamentos = this.mapeamentoArquivo();
 		List<HistoricoCombustivelEntidade> listaHistoricoCombustivel = null;
@@ -39,17 +37,27 @@ public class ImportarArquivoCSV implements ImportarArquivo{
 			
 			for (CSVRecord record:records) {
 				
+				HistoricoCombustivelEntidade historicoCombustivelEntidade = new HistoricoCombustivelEntidade();
 				for (String header : mapeamentos.keySet() ) {
-				
+					
 					if (record.isMapped(mapeamentos.get(header))) {
-						String produto= record.get(mapeamentos.get(header));
-//				 	String valor= record.get("valor");
+						
+						historicoCombustivelEntidade = InvokeMetodoClasse.retornarHistoricoCombustivel(historicoCombustivelEntidade, header, record.get(mapeamentos.get(header)));
+
 					}
 				}
+				
+				listaHistoricoCombustivel.add(historicoCombustivelEntidade);
 			 	
 			}
 			
 		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
 			e.printStackTrace();
 		}
 		

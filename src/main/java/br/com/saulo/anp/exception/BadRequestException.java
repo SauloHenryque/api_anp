@@ -1,7 +1,7 @@
 
 package br.com.saulo.anp.exception;
 
-public class BadRequestException extends ExceptionOrder{
+public class BadRequestException extends Exceptions{
 
      private static final long serialVersionUID = -8570200930094282480L;
      

@@ -1,6 +1,6 @@
 package br.com.saulo.anp.servicos;
 
-import static br.com.saulo.anp.exception.ExceptionOrder.checkThrow;
+import static br.com.saulo.anp.exception.Exceptions.checkThrow;
 import static br.com.saulo.anp.exception.ExceptionsMessagesEnum.EMAIL_JA_CADASTRADO;
 import static br.com.saulo.anp.exception.ExceptionsMessagesEnum.REGISTRO_NAO_ENCONTRADO;
 

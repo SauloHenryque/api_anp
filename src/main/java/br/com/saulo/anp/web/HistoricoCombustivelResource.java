@@ -20,9 +20,11 @@ import org.springframework.web.multipart.MultipartFile;
 import br.com.saulo.anp.dto.persists.HistoricoCombustivelPersist;
 import br.com.saulo.anp.dto.request.HistoricoCombustivelRequest;
 import br.com.saulo.anp.dto.responses.HistoricoCombustivelResponse;
+import br.com.saulo.anp.entidades.ArquivoImportadoEntidade;
 import br.com.saulo.anp.entidades.HistoricoCombustivelEntidade;
+import br.com.saulo.anp.servicos.ArquivoImportadoServico;
 import br.com.saulo.anp.servicos.HistoricoCombustivelServico;
-import br.com.saulo.anp.ultil.GenericConvert;
+import br.com.saulo.anp.ultil.ConversorGenerico;
 import io.swagger.annotations.Api;
 
 @RestController
@@ -33,12 +35,15 @@ public class HistoricoCombustivelResource {
 	 	@Autowired
 		private HistoricoCombustivelServico historicoCombustivelServico;
 		
+	 	@Autowired
+		private ArquivoImportadoServico arquivoImportadoServico;
+	 	
 	 	@PostMapping
 	    public ResponseEntity<?> salvar(@RequestBody @Valid HistoricoCombustivelPersist request) {
 
-			HistoricoCombustivelEntidade historicoCombustivelEntidade   = GenericConvert.convertModelMapper(request, HistoricoCombustivelEntidade.class);
+			HistoricoCombustivelEntidade historicoCombustivelEntidade   = ConversorGenerico.convertModelMapper(request, HistoricoCombustivelEntidade.class);
 			historicoCombustivelEntidade 								= historicoCombustivelServico.salvarHistoricoCombustivel(historicoCombustivelEntidade);
-			HistoricoCombustivelResponse response 						= GenericConvert.convertModelMapper(historicoCombustivelEntidade, HistoricoCombustivelResponse.class);
+			HistoricoCombustivelResponse response 						= ConversorGenerico.convertModelMapper(historicoCombustivelEntidade, HistoricoCombustivelResponse.class);
 
 			return ResponseEntity.status(HttpStatus.CREATED).body(response);
 	    }
@@ -46,11 +51,11 @@ public class HistoricoCombustivelResource {
 		@PutMapping("/{id}")
 	    public ResponseEntity<?> atualizar(@PathVariable("id") long id, @RequestBody @Valid HistoricoCombustivelPersist request ) {
 			
-			HistoricoCombustivelEntidade historicoCombustivelEntidade 	= GenericConvert.convertModelMapper(request, HistoricoCombustivelEntidade.class);
+			HistoricoCombustivelEntidade historicoCombustivelEntidade 	= ConversorGenerico.convertModelMapper(request, HistoricoCombustivelEntidade.class);
 			historicoCombustivelEntidade.setId(id);
 			
 			historicoCombustivelEntidade 				= historicoCombustivelServico.atualizarHistoricoCombustivel(historicoCombustivelEntidade);
-			HistoricoCombustivelResponse response 		= GenericConvert.convertModelMapper(historicoCombustivelEntidade, HistoricoCombustivelResponse.class);
+			HistoricoCombustivelResponse response 		= ConversorGenerico.convertModelMapper(historicoCombustivelEntidade, HistoricoCombustivelResponse.class);
 
 			return ResponseEntity.status(HttpStatus.OK).body(response);
 	    }
@@ -58,7 +63,7 @@ public class HistoricoCombustivelResource {
 		@GetMapping
 	    public ResponseEntity<?> listar(@Valid HistoricoCombustivelRequest historicoCombustivelRequest) {
 			
-			HistoricoCombustivelEntidade historicoCombustivelEntidade = GenericConvert.convertModelMapper(historicoCombustivelRequest, HistoricoCombustivelEntidade.class);	
+			HistoricoCombustivelEntidade historicoCombustivelEntidade = ConversorGenerico.convertModelMapper(historicoCombustivelRequest, HistoricoCombustivelEntidade.class);	
 			return ResponseEntity.status(HttpStatus.OK).body(historicoCombustivelServico.listarHistoricoCombustivel(historicoCombustivelEntidade));
 	    }
 		
@@ -72,8 +77,12 @@ public class HistoricoCombustivelResource {
 		@PostMapping("/importar-arquivo")
 		public ResponseEntity<?> importarArquivo (@RequestPart("arquivo_excel") MultipartFile files) {
 
-//			historicoCombustivelServico.importarHistoricoCombustivel(files);
+			ArquivoImportadoEntidade arquivoImportadoEntidade = new ArquivoImportadoEntidade();
+			arquivoImportadoEntidade.setNome(files.getOriginalFilename());
+			arquivoImportadoServico.salvarArquivo(arquivoImportadoEntidade);
 			
+			
+			historicoCombustivelServico.importarArquivoHistoricoCombustivel(files);
 			return ResponseEntity.ok(HttpStatus.OK);
 			
 		}

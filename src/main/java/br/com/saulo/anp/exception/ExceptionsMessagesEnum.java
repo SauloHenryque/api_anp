@@ -16,6 +16,8 @@ public enum ExceptionsMessagesEnum {
 
 	REGISTRO_NAO_ENCONTRADO(NOT_FOUND.value(), "registro_nao_encontrado", NotFoundException.class),
 	
+	NOME_JA_CADASTRADO(BAD_REQUEST.value(), "nome_ja_cadastrado", BadRequestException.class),
+	
 	EMAIL_JA_CADASTRADO(BAD_REQUEST.value(), "email_ja_cadastrado", BadRequestException.class)
 	
 
@@ -28,9 +30,9 @@ public enum ExceptionsMessagesEnum {
     private String key;
 
     @Getter
-    private Class<? extends ExceptionOrder> klass;
+    private Class<? extends Exceptions> klass;
 
-    ExceptionsMessagesEnum(int codigo, String key, Class<? extends ExceptionOrder> klass) {
+    ExceptionsMessagesEnum(int codigo, String key, Class<? extends Exceptions> klass) {
 
         this.key = key;
         this.klass = klass;

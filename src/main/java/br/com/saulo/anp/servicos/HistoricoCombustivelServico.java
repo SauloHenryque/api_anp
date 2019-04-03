@@ -1,19 +1,15 @@
 package br.com.saulo.anp.servicos;
 
-import static br.com.saulo.anp.exception.ExceptionOrder.checkThrow;
-import static br.com.saulo.anp.exception.ExceptionsMessagesEnum.EMAIL_JA_CADASTRADO;
-import static br.com.saulo.anp.exception.ExceptionsMessagesEnum.REGISTRO_NAO_ENCONTRADO;
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import br.com.saulo.anp.entidades.HistoricoCombustivelEntidade;
-import br.com.saulo.anp.entidades.UserEntidade;
+import br.com.saulo.anp.importacao.ImportarArquivoCSV;
 import br.com.saulo.anp.repositorios.HistoricoCombustivelRepositorio;
-import br.com.saulo.anp.repositorios.UserRepositorio;
 import lombok.Data;
 
 @Data
@@ -50,6 +46,23 @@ public class HistoricoCombustivelServico {
 //		checkThrow(!historicoCombustivelRepositorio.existsById(id), REGISTRO_NAO_ENCONTRADO);
 //    	HistoricoCombustivelEntidade historicoCombustivelEntidade = historicoCombustivelRepositorio.findById(id);
 //    	historicoCombustivelRepositorio.delete(historicoCombustivelEntidade);
+    }
+    
+    
+    @SuppressWarnings("null")
+	public List<HistoricoCombustivelEntidade> importarArquivoHistoricoCombustivel (MultipartFile files) {
+    	
+    	List<HistoricoCombustivelEntidade> result = null;
+    	ImportarArquivoCSV importarArquivo  = new ImportarArquivoCSV();
+    	List<HistoricoCombustivelEntidade> listHistoricoCombustivel = importarArquivo.lerArquivo(files);
+    	
+    	for (HistoricoCombustivelEntidade historicoCombustivel : listHistoricoCombustivel) {
+    		
+    			result.add(historicoCombustivelRepositorio.save(historicoCombustivel));
+    	}
+    	
+    	return result;
+    	
     }
 
 

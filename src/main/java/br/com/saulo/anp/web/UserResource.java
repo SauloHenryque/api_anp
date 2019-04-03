@@ -1,15 +1,9 @@
 package br.com.saulo.anp.web;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.lang.reflect.InvocationTargetException;
 
 import javax.validation.Valid;
 
-import org.apache.commons.csv.CSVFormat;
-import org.apache.commons.csv.CSVRecord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -21,17 +15,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 
 import br.com.saulo.anp.dto.persists.UserPersist;
 import br.com.saulo.anp.dto.request.UserRequest;
 import br.com.saulo.anp.dto.responses.UserResponse;
 import br.com.saulo.anp.entidades.UserEntidade;
-import br.com.saulo.anp.importacao.ImportarArquivoCSV;
 import br.com.saulo.anp.servicos.UserServico;
-import br.com.saulo.anp.ultil.GenericConvert;
+import br.com.saulo.anp.ultil.ConversorGenerico;
 import br.com.saulo.anp.ultil.InvokeMetodoClasse;
 import io.swagger.annotations.Api;
 
@@ -48,9 +39,9 @@ public class UserResource {
 
 	 		
 	 		InvokeMetodoClasse.retornarValorMetodo("regiao");
-			UserEntidade userEntidade   = GenericConvert.convertModelMapper(request, UserEntidade.class);
+			UserEntidade userEntidade   = ConversorGenerico.convertModelMapper(request, UserEntidade.class);
 			userEntidade 				= userServico.salvarUser(userEntidade);
-			UserResponse response 		= GenericConvert.convertModelMapper(userEntidade, UserResponse.class);
+			UserResponse response 		= ConversorGenerico.convertModelMapper(userEntidade, UserResponse.class);
 
 			return ResponseEntity.status(HttpStatus.CREATED).body(response);
 	    }
@@ -58,11 +49,11 @@ public class UserResource {
 		@PutMapping("/{id}")
 	    public ResponseEntity<?> atualizar(@PathVariable("id") long id, @RequestBody @Valid UserPersist request ) {
 			
-			UserEntidade userEntidade 	= GenericConvert.convertModelMapper(request, UserEntidade.class);
+			UserEntidade userEntidade 	= ConversorGenerico.convertModelMapper(request, UserEntidade.class);
 			userEntidade.setId(id);
 			
 			userEntidade 				= userServico.atualizarUser(userEntidade);
-			UserResponse response 		= GenericConvert.convertModelMapper(userEntidade, UserResponse.class);
+			UserResponse response 		= ConversorGenerico.convertModelMapper(userEntidade, UserResponse.class);
 
 			return ResponseEntity.status(HttpStatus.OK).body(response);
 	    }
@@ -70,7 +61,7 @@ public class UserResource {
 		@GetMapping
 	    public ResponseEntity<?> listar(@Valid UserRequest lojaRequest) {
 			
-			UserEntidade userEntidade = GenericConvert.convertModelMapper(lojaRequest, UserEntidade.class);	
+			UserEntidade userEntidade = ConversorGenerico.convertModelMapper(lojaRequest, UserEntidade.class);	
 			return ResponseEntity.status(HttpStatus.OK).body(userServico.listarUser(userEntidade));
 	    }
 		
@@ -80,24 +71,5 @@ public class UserResource {
 			userServico.deletarUser(id);
 	        return ResponseEntity.ok(HttpStatus.OK);
 	    }
-		
-		@PostMapping("/importar-arquivo")
-		public String importarArquivo (@RequestPart("arquivo_excel") MultipartFile files) throws IOException {
-
-			ImportarArquivoCSV teste = new ImportarArquivoCSV();
-			teste.lerArquivo(files);
-			
-//			InputStream teste = files.getInputStream();
-//			BufferedReader br = new BufferedReader(new InputStreamReader(teste, "UTF8")); 
-//			Iterable<CSVRecord> parser = CSVFormat.DEFAULT.withDelimiter(';').withFirstRecordAsHeader().parse(br);
-			
-//			 for (CSVRecord record:parser) {
-//				 	String produto= record.get("produto");
-//				 	String valor= record.get("valor");
-//		     }
-
-			return null;
-			
-		}
 
 }
