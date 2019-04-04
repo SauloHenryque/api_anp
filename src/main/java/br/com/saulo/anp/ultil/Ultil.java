@@ -1,5 +1,7 @@
 package br.com.saulo.anp.ultil;
 
+import com.github.thiagonego.alfred.object.Objeto;
+
 public class Ultil {
 	
 	   public static String primeiraLetraMaiuscula(String palavra) {
@@ -13,10 +15,12 @@ public class Ultil {
 	   
 	   public static Boolean dataValida(String dataAnalisada) {
 		   
-		   String DatePattern = "^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[012])/[12][0-9]{3}$";
-			if ( dataAnalisada.matches(DatePattern) ) {
-				return true;
-			}
+		   if (Objeto.notBlank(dataAnalisada)) {
+			   String DatePattern = "^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[012])/[12][0-9]{3}$";
+			   	if ( dataAnalisada.matches(DatePattern) ) {
+			   		return true;
+			   	}
+		   }
 			
 			return false;
 	   }

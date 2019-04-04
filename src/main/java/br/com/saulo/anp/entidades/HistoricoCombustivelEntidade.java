@@ -83,7 +83,7 @@ public class HistoricoCombustivelEntidade implements Serializable {
     
     
     public void setValor_venda(String valorVenda) {
-    	this.valor_venda = new BigDecimal(0);
+    	this.valor_venda = null;
     	
     	if (Objeto.notBlank(valorVenda)) {
     		this.valor_venda = new BigDecimal(valorVenda.replace(',', '.'));	
@@ -93,7 +93,7 @@ public class HistoricoCombustivelEntidade implements Serializable {
     
     public void setValor_compra(String valorCompra) {
     	
-    	this.valor_compra = new BigDecimal(0);
+    	this.valor_compra = null;
     	
     	if (Objeto.notBlank(valorCompra)) {
     		this.valor_compra = new BigDecimal(valorCompra.replace(',', '.'));
