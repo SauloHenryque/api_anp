@@ -30,6 +30,6 @@ public class RelatorioServico {
 	
 	public List<HistoricoCombustivelRegiaoEntidade> detalhePorRegiao() {
 		
-		return historicoCombustivelRegiaoRepositorio.findAll();
+		return historicoCombustivelRegiaoRepositorio.findAllByRegiao();
 	}
 }
