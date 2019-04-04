@@ -1,5 +1,9 @@
 package br.com.saulo.anp.servicos;
 
+import static br.com.saulo.anp.exception.Exceptions.checkThrow;
+import static br.com.saulo.anp.exception.ExceptionsMessagesEnum.REGISTRO_NAO_ENCONTRADO;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,17 +25,14 @@ public class HistoricoCombustivelServico {
     private HistoricoCombustivelRepositorio historicoCombustivelRepositorio;
 
 	public HistoricoCombustivelEntidade salvarHistoricoCombustivel(HistoricoCombustivelEntidade historicoCombustivelEntidade) {
-		
-//		checkThrow(historicoCombustivelRepositorio.existsByEmail(userEntidade.getEmail()), EMAIL_JA_CADASTRADO);
+	
         return historicoCombustivelRepositorio.save(historicoCombustivelEntidade);
 
 	}
 	
 	public HistoricoCombustivelEntidade atualizarHistoricoCombustivel(HistoricoCombustivelEntidade historicoCombustivelEntidade) {
 		
-//		checkThrow(!userRepositorio.existsById(userEntidade.getId()), REGISTRO_NAO_ENCONTRADO);
-//		checkThrow(userRepositorio.existsByEmailAndIdNotIn(userEntidade.getNome(), userEntidade.getId()), EMAIL_JA_CADASTRADO);
-		 
+		checkThrow(!historicoCombustivelRepositorio.existsById(historicoCombustivelEntidade.getId()), REGISTRO_NAO_ENCONTRADO);
 		return historicoCombustivelRepositorio.save(historicoCombustivelEntidade);
 	}
 	
@@ -43,16 +44,15 @@ public class HistoricoCombustivelServico {
 	
     public void deletarHistoricoCombustivel(long id) {
     	
-//		checkThrow(!historicoCombustivelRepositorio.existsById(id), REGISTRO_NAO_ENCONTRADO);
-//    	HistoricoCombustivelEntidade historicoCombustivelEntidade = historicoCombustivelRepositorio.findById(id);
-//    	historicoCombustivelRepositorio.delete(historicoCombustivelEntidade);
+		checkThrow(!historicoCombustivelRepositorio.existsById(id), REGISTRO_NAO_ENCONTRADO);
+    	HistoricoCombustivelEntidade historicoCombustivelEntidade = historicoCombustivelRepositorio.findById(id);
+    	historicoCombustivelRepositorio.delete(historicoCombustivelEntidade);
     }
     
-    
-    @SuppressWarnings("null")
+
 	public List<HistoricoCombustivelEntidade> importarArquivoHistoricoCombustivel (MultipartFile files) {
     	
-    	List<HistoricoCombustivelEntidade> result = null;
+    	List<HistoricoCombustivelEntidade> result = new ArrayList<HistoricoCombustivelEntidade>();
     	ImportarArquivoCSV importarArquivo  = new ImportarArquivoCSV();
     	List<HistoricoCombustivelEntidade> listHistoricoCombustivel = importarArquivo.lerArquivo(files);
     	

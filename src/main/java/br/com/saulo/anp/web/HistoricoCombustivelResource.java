@@ -81,10 +81,7 @@ public class HistoricoCombustivelResource {
 			arquivoImportadoEntidade.setNome(files.getOriginalFilename());
 			arquivoImportadoServico.salvarArquivo(arquivoImportadoEntidade);
 			
-			
-			historicoCombustivelServico.importarArquivoHistoricoCombustivel(files);
-			return ResponseEntity.ok(HttpStatus.OK);
-			
+			return ResponseEntity.status(HttpStatus.OK).body(historicoCombustivelServico.importarArquivoHistoricoCombustivel(files));
 		}
 
 }

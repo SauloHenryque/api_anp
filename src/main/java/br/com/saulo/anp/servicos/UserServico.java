@@ -1,7 +1,7 @@
 package br.com.saulo.anp.servicos;
 
 import static br.com.saulo.anp.exception.Exceptions.checkThrow;
-import static br.com.saulo.anp.exception.ExceptionsMessagesEnum.EMAIL_JA_CADASTRADO;
+import static br.com.saulo.anp.exception.ExceptionsMessagesEnum.NOME_JA_CADASTRADO;
 import static br.com.saulo.anp.exception.ExceptionsMessagesEnum.REGISTRO_NAO_ENCONTRADO;
 
 import java.util.List;
@@ -24,7 +24,7 @@ public class UserServico {
 
 	public UserEntidade salvarUser(UserEntidade userEntidade) {
 		
-		checkThrow(userRepositorio.existsByEmail(userEntidade.getEmail()), EMAIL_JA_CADASTRADO);
+		checkThrow(userRepositorio.existsByEmail(userEntidade.getEmail()), NOME_JA_CADASTRADO);
         return userRepositorio.save(userEntidade);
 
 	}
@@ -32,7 +32,7 @@ public class UserServico {
 	public UserEntidade atualizarUser(UserEntidade userEntidade) {
 		
 		checkThrow(!userRepositorio.existsById(userEntidade.getId()), REGISTRO_NAO_ENCONTRADO);
-		checkThrow(userRepositorio.existsByEmailAndIdNotIn(userEntidade.getNome(), userEntidade.getId()), EMAIL_JA_CADASTRADO);
+		checkThrow(userRepositorio.existsByEmailAndIdNotIn(userEntidade.getNome(), userEntidade.getId()), NOME_JA_CADASTRADO);
 		 
 		return userRepositorio.save(userEntidade);
 	}

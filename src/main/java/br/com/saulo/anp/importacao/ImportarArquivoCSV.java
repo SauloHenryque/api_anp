@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,7 +26,7 @@ public class ImportarArquivoCSV implements ImportarArquivo{
 	public List<HistoricoCombustivelEntidade> lerArquivo(MultipartFile files){
 		
 		Map<String,String> mapeamentos = this.mapeamentoArquivo();
-		List<HistoricoCombustivelEntidade> listaHistoricoCombustivel = null;
+		List<HistoricoCombustivelEntidade> listaHistoricoCombustivel = new ArrayList<HistoricoCombustivelEntidade>();
 		InputStream inputStream;
 		
 		try {
