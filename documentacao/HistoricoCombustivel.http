@@ -1,0 +1,44 @@
+POST  http://localhost:8080/api/historico-combustivel
+content-type: application/json
+
+{
+    "regiao": "CO",
+    "estado": "DF",
+    "municipio": "BRASILIA",
+    "revenda": "AUTO POSTO BRAGA LTDA",
+    "instalacao": "7890",
+    "produto": "DIESEL",
+    "data_coleta": "03/01/2018",
+    "valor_compra": "3,218",
+    "valor_venda": "3,88",
+    "unidade": "R$ / litro",
+    "bandeira": "R$ / litro"
+}
+
+
+#####
+
+GET http://localhost:8080/api/historico-combustivel
+
+###
+
+PUT http://localhost:8080/api/historico-combustivel/1
+content-type: application/json
+
+{
+    "regiao": "NO",
+    "estado": "PB",
+    "municipio": "JOÃO PESSOA",
+    "revenda": "AUTO POSTO BRAGA LTDA",
+    "instalacao": "7890",
+    "produto": "DIESEL",
+    "data_coleta": "03/01/2018",
+    "valor_compra": "3,218",
+    "valor_venda": "3,88",
+    "unidade": "R$ / litro",
+    "bandeira": "R$ / litro"
+}
+
+####
+
+DELETE http://localhost:8080/api/historico-combustivel/1

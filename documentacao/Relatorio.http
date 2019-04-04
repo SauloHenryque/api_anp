@@ -1,0 +1,9 @@
+GET http://localhost:8080/api/relatorio/detalhe-por-regiao
+
+#####
+
+GET http://localhost:8080/api/relatorio/media-preco-combustivel
+
+#####
+
+GET http://localhost:8080/api/relatorio/detalhe-por-destribuidora

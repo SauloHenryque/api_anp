@@ -50,10 +50,5 @@ public class UserEntidade implements Serializable {
     
     @Column(name = "PASSWORD")
     private String password;
-    
-    public String getTeste() {
-    	
-    	return "teste";
-    }
 
 }

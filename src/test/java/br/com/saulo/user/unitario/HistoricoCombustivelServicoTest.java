@@ -54,7 +54,7 @@ public class HistoricoCombustivelServicoTest {
     	 historicoCombustivelEntidadeNovo.setInstalacao("7890");
     	 historicoCombustivelEntidadeNovo.setProduto("DIESEL");
     	 historicoCombustivelEntidadeNovo.setData_coleta("03/01/2018");
-    	 historicoCombustivelEntidadeNovo.setValor_compra("3.218");
+    	 historicoCombustivelEntidadeNovo.setValor_compra("3,218");
     	 historicoCombustivelEntidadeNovo.setValor_venda("3,218");
     	 historicoCombustivelEntidadeNovo.setUnidade("R$ / litro");
     	 historicoCombustivelEntidadeNovo.setBandeira("PETROBRAS DISTRIBUIDORA S.A.");
@@ -78,7 +78,7 @@ public class HistoricoCombustivelServicoTest {
     	 historicoCombustivelEntidadeNovo.setInstalacao("7890");
     	 historicoCombustivelEntidadeNovo.setProduto("DIESEL");
     	 historicoCombustivelEntidadeNovo.setData_coleta("03/01/2018");
-    	 historicoCombustivelEntidadeNovo.setValor_compra("3.218");
+    	 historicoCombustivelEntidadeNovo.setValor_compra("3,218");
     	 historicoCombustivelEntidadeNovo.setValor_venda("3,218");
     	 historicoCombustivelEntidadeNovo.setUnidade("R$ / litro");
     	 historicoCombustivelEntidadeNovo.setBandeira("PETROBRAS DISTRIBUIDORA S.A.");
@@ -105,7 +105,7 @@ public class HistoricoCombustivelServicoTest {
    	 	historicoCombustivelEntidadeNovo.setInstalacao("7890");
    	 	historicoCombustivelEntidadeNovo.setProduto("DIESEL");
    	 	historicoCombustivelEntidadeNovo.setData_coleta("03/01/2018");
-   	 	historicoCombustivelEntidadeNovo.setValor_compra("3.218");
+   	 	historicoCombustivelEntidadeNovo.setValor_compra("3,218");
    	 	historicoCombustivelEntidadeNovo.setValor_venda("3,218");
    	 	historicoCombustivelEntidadeNovo.setUnidade("R$ / litro");
    	 	historicoCombustivelEntidadeNovo.setBandeira("PETROBRAS DISTRIBUIDORA S.A.");
