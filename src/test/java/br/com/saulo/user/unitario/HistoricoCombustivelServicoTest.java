@@ -1,20 +1,27 @@
 package br.com.saulo.user.unitario;
 
+import static org.junit.Assert.assertNotNull;
+
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.google.common.collect.Lists;
+
 import br.com.saulo.anp.entidades.HistoricoCombustivelEntidade;
-import br.com.saulo.anp.entidades.UserEntidade;
-import br.com.saulo.anp.exception.BadRequestException;
 import br.com.saulo.anp.exception.NotFoundException;
 import br.com.saulo.anp.repositorios.HistoricoCombustivelRepositorio;
 import br.com.saulo.anp.servicos.HistoricoCombustivelServico;
 import junit.framework.TestCase;
+import org.springframework.data.domain.Example;
+
 
 @RunWith(SpringRunner.class)
 public class HistoricoCombustivelServicoTest {
@@ -40,130 +47,125 @@ public class HistoricoCombustivelServicoTest {
     	 
     	 HistoricoCombustivelEntidade	historicoCombustivelEntidadeNovo		 = new HistoricoCombustivelEntidade();
     	 
-//    	 historicoCombustivelEntidadeNovo.setNome("Nome Teste");
-//    	 historicoCombustivelEntidadeNovo.setEmail("email@teste.com");
-//    	 historicoCombustivelEntidadeNovo.setPassword("13321344654");
-//    	 
-//         Mockito.when(historicoCombustivelRepositorio.existsByEmail("Teste")).thenReturn(false);
-//         Mockito.when(historicoCombustivelRepositorio.save(Mockito.any(UserEntidade.class))).thenReturn(historicoCombustivelEntidadeNovo);
-//
-//         HistoricoCombustivelEntidade historicoCombustivelEntidadeCadastrado = historicoCombustivelServicoMock.salvarHistoricoCombustivel(historicoCombustivelEntidadeNovo);
-//
-//         testCase(historicoCombustivelEntidadeNovo, historicoCombustivelEntidadeCadastrado);
+    	 historicoCombustivelEntidadeNovo.setRegiao("CO");
+    	 historicoCombustivelEntidadeNovo.setEstado("DF");
+    	 historicoCombustivelEntidadeNovo.setMunicipio("BRASILIA");
+    	 historicoCombustivelEntidadeNovo.setRevenda("AUTO POSTO BRAGA LTDA");
+    	 historicoCombustivelEntidadeNovo.setInstalacao("7890");
+    	 historicoCombustivelEntidadeNovo.setProduto("DIESEL");
+    	 historicoCombustivelEntidadeNovo.setData_coleta("03/01/2018");
+    	 historicoCombustivelEntidadeNovo.setValor_compra("3,218");
+    	 historicoCombustivelEntidadeNovo.setValor_venda("3,559");
+    	 historicoCombustivelEntidadeNovo.setUnidade("R$ / litro");
+    	 historicoCombustivelEntidadeNovo.setBandeira("PETROBRAS DISTRIBUIDORA S.A.");
+    	  
+         Mockito.when(historicoCombustivelRepositorio.save(Mockito.any(HistoricoCombustivelEntidade.class))).thenReturn(historicoCombustivelEntidadeNovo);
+         HistoricoCombustivelEntidade historicoCombustivelEntidadeCadastrado = historicoCombustivelServicoMock.salvarHistoricoCombustivel(historicoCombustivelEntidadeNovo);
+
+         testCase(historicoCombustivelEntidadeNovo, historicoCombustivelEntidadeCadastrado);
      }
-     
-     @Test(expected = BadRequestException.class)
-     public void salvarUserEmailRepetido(){
-    	 
-    	 UserEntidade	userEntidadeNovo		 = new UserEntidade();
-    	 
-    	 userEntidadeNovo.setNome("Nome Teste");
-    	 userEntidadeNovo.setEmail("email@teste.com");
-    	 userEntidadeNovo.setPassword("13321344654");
-    	 
-//         Mockito.when(userRepositorio.existsByEmail("email@teste.com")).thenReturn(true);
-//         Mockito.when(userRepositorio.save(Mockito.any(UserEntidade.class))).thenReturn(userEntidadeNovo);
-//
-//         userServicoMock.salvarUser(userEntidadeNovo);
-     }
-     
      
     @Test
-    public void atualizarUser(){
+    public void atualizar(){
     	 
-    	 UserEntidade	userEntidadeNovo		 = new UserEntidade();
+    	HistoricoCombustivelEntidade	historicoCombustivelEntidadeNovo		 = new HistoricoCombustivelEntidade();
     	 
-    	 userEntidadeNovo.setId(1L);
-    	 userEntidadeNovo.setNome("Nome Teste");
-    	 userEntidadeNovo.setEmail("email@teste.com");
-    	 userEntidadeNovo.setPassword("13321344654");
+    	 historicoCombustivelEntidadeNovo.setId(1L);
+    	 historicoCombustivelEntidadeNovo.setRegiao("CO");
+    	 historicoCombustivelEntidadeNovo.setEstado("DF");
+    	 historicoCombustivelEntidadeNovo.setMunicipio("BRASILIA");
+    	 historicoCombustivelEntidadeNovo.setRevenda("AUTO POSTO BRAGA LTDA");
+    	 historicoCombustivelEntidadeNovo.setInstalacao("7890");
+    	 historicoCombustivelEntidadeNovo.setProduto("DIESEL");
+    	 historicoCombustivelEntidadeNovo.setData_coleta("03/01/2018");
+    	 historicoCombustivelEntidadeNovo.setValor_compra("3,218");
+    	 historicoCombustivelEntidadeNovo.setValor_venda("3,559");
+    	 historicoCombustivelEntidadeNovo.setUnidade("R$ / litro");
+    	 historicoCombustivelEntidadeNovo.setBandeira("PETROBRAS DISTRIBUIDORA S.A.");
     	 
-//    	 Mockito.when(userRepositorio.existsById(1L)).thenReturn(true);
-//         Mockito.when(userRepositorio.existsByEmailAndIdNotIn("email@teste.com", 1L)).thenReturn(false);
-//         Mockito.when(userRepositorio.save(Mockito.any(UserEntidade.class))).thenReturn(userEntidadeNovo);
-//
-//         UserEntidade userEntidadeAtualizado = userServicoMock.atualizarUser(userEntidadeNovo);
+    	 Mockito.when(historicoCombustivelRepositorio.existsById(1L)).thenReturn(true);
+         Mockito.when(historicoCombustivelRepositorio.save(Mockito.any(HistoricoCombustivelEntidade.class))).thenReturn(historicoCombustivelEntidadeNovo);
 
-//         testCase(userEntidadeNovo, userEntidadeAtualizado);
-//         TestCase.assertEquals(userEntidadeNovo.getId(), userEntidadeAtualizado.getId());
+         HistoricoCombustivelEntidade historicoCombustivelEntidadeAtualizado = historicoCombustivelServicoMock.atualizarHistoricoCombustivel(historicoCombustivelEntidadeNovo);
+
+         testCase(historicoCombustivelEntidadeNovo, historicoCombustivelEntidadeAtualizado);
+         TestCase.assertEquals(historicoCombustivelEntidadeNovo.getId(), historicoCombustivelEntidadeAtualizado.getId());
     }
     
     @Test(expected = NotFoundException.class)
-    public void atualizarUserNaoEncontrado(){
+    public void atualizarNaoEncontrado(){
    	 
-   	 	UserEntidade	userEntidadeNovo		 = new UserEntidade();
+    	HistoricoCombustivelEntidade	historicoCombustivelEntidadeNovo		 = new HistoricoCombustivelEntidade();
    	 
-   	 	userEntidadeNovo.setId(1L);
-   	 	userEntidadeNovo.setNome("Nome Teste");
-   	 	userEntidadeNovo.setEmail("email@teste.com");
-   	 	userEntidadeNovo.setPassword("13321344654");
-//   	 
-//   	 	Mockito.when(userRepositorio.existsById(1L)).thenReturn(false);
-//   	 	Mockito.when(userRepositorio.existsByEmailAndIdNotIn("email@teste.com", 1L)).thenReturn(false);
-//   	 	Mockito.when(userRepositorio.save(Mockito.any(UserEntidade.class))).thenReturn(userEntidadeNovo);
+   	 	historicoCombustivelEntidadeNovo.setId(1L);
+   	 	historicoCombustivelEntidadeNovo.setRegiao("CO");
+   	 	historicoCombustivelEntidadeNovo.setEstado("DF");
+   	 	historicoCombustivelEntidadeNovo.setMunicipio("BRASILIA");
+   	 	historicoCombustivelEntidadeNovo.setRevenda("AUTO POSTO BRAGA LTDA");
+   	 	historicoCombustivelEntidadeNovo.setInstalacao("7890");
+   	 	historicoCombustivelEntidadeNovo.setProduto("DIESEL");
+   	 	historicoCombustivelEntidadeNovo.setData_coleta("03/01/2018");
+   	 	historicoCombustivelEntidadeNovo.setValor_compra("3,218");
+   	 	historicoCombustivelEntidadeNovo.setValor_venda("3,559");
+   	 	historicoCombustivelEntidadeNovo.setUnidade("R$ / litro");
+   	 	historicoCombustivelEntidadeNovo.setBandeira("PETROBRAS DISTRIBUIDORA S.A.");
+   	 
+   	 	Mockito.when(historicoCombustivelRepositorio.existsById(1L)).thenReturn(false);
+   	 	Mockito.when(historicoCombustivelRepositorio.save(Mockito.any(HistoricoCombustivelEntidade.class))).thenReturn(historicoCombustivelEntidadeNovo);
 
-//   	 	userServicoMock.atualizarUser(userEntidadeNovo);
+   	 	historicoCombustivelServicoMock.atualizarHistoricoCombustivel(historicoCombustivelEntidadeNovo);
     }
-    
-    @Test(expected = BadRequestException.class)
-    public void atualizarUserNomeRepetido(){
-   	 
-   	 	UserEntidade	userEntidadeNovo		 = new UserEntidade();
-   	 
-   	 	userEntidadeNovo.setId(1L);
-   	 	userEntidadeNovo.setNome("Nome Teste");
-   	 	userEntidadeNovo.setEmail("email@teste.com");
-   	 	userEntidadeNovo.setPassword("13321344654");
-   	 
-//   	 	Mockito.when(userRepositorio.existsById(1L)).thenReturn(true);
-//   	 	Mockito.when(userRepositorio.existsByEmailAndIdNotIn("email@teste.com", 1L)).thenReturn(true);
-//   	 	Mockito.when(userRepositorio.save(Mockito.any(UserEntidade.class))).thenReturn(userEntidadeNovo);
-//
-//   	 	userServicoMock.atualizarUser(userEntidadeNovo);
-    }
-    
+
     @Test()
-    public void deletarUser(){
+    public void deletar(){
    	 
-//   	 	Mockito.when(userRepositorio.existsById(1L)).thenReturn(true);
-//   	 	Mockito.when(userRepositorio.findById(1L)).thenReturn(userEntidade);
-//
-//   	 	userServicoMock.deletarUser(1L);
+   	 	Mockito.when(historicoCombustivelRepositorio.existsById(1L)).thenReturn(true);
+   	 	Mockito.when(historicoCombustivelRepositorio.findById(1L)).thenReturn(historicoCombustivelEntidade);
+
+   	 	historicoCombustivelServicoMock.deletarHistoricoCombustivel(1L);
     }
     
     @Test(expected = NotFoundException.class)
     public void deletarUserInexistente(){
    	 
-//   	 	Mockito.when(userRepositorio.existsById(1L)).thenReturn(false);
-//   	 	Mockito.when(userRepositorio.findById(1L)).thenReturn(userEntidade);
-//
-//   	 	userServicoMock.deletarUser(1L);
+   	 	Mockito.when(historicoCombustivelRepositorio.existsById(1L)).thenReturn(false);
+   	 	Mockito.when(historicoCombustivelRepositorio.findById(1L)).thenReturn(historicoCombustivelEntidade);
+
+   	 	historicoCombustivelServicoMock.deletarHistoricoCombustivel(1L);
     }
 
     @Test
     public void testListar() {
 
-    	UserEntidade	userEntidadeList		 = new UserEntidade();
+    	HistoricoCombustivelEntidade	historicoCombustivelEntidadeList		 = new HistoricoCombustivelEntidade();
 	 
-    	userEntidadeList.setNome("Nome Teste");
+    	historicoCombustivelEntidadeList.setRegiao("CO");
     	
-//        List<UserEntidade> listaUserEntidade  = Lists.newArrayList(userEntidade);
-//    	 	
-//        Mockito.when(userRepositorio.findAll(Example.of(userEntidadeList))).thenReturn(listaUserEntidade);
-//    	 
-//        List<UserEntidade> listStoreEntidade = userServicoMock.listarUser(userEntidade);
-//       
-//    	assertNotNull(listStoreEntidade);
+        List<HistoricoCombustivelEntidade> listaHistoricoCombustivelEntidade  = Lists.newArrayList(historicoCombustivelEntidade);
+    	 	
+        Mockito.when(historicoCombustivelRepositorio.findAll(Example.of(historicoCombustivelEntidadeList))).thenReturn(listaHistoricoCombustivelEntidade);
+    	 
+        List<HistoricoCombustivelEntidade> listHistoricoCombustivelEntidade = historicoCombustivelServicoMock.listarHistoricoCombustivel(historicoCombustivelEntidade);
+       
+    	assertNotNull(listHistoricoCombustivelEntidade);
         
 
     }
     
-	private static void testCase(UserEntidade userEntidade, UserEntidade userEntidadeCadastrado) {
+	private static void testCase(HistoricoCombustivelEntidade historicoCombustivelEntidade, HistoricoCombustivelEntidade historicoCombustivelEntidadeCadastrado) {
          
-         TestCase.assertNotNull(userEntidadeCadastrado);
-         TestCase.assertEquals(userEntidade.getNome(), userEntidadeCadastrado.getNome());
-         TestCase.assertEquals(userEntidade.getEmail(), userEntidadeCadastrado.getEmail());
-         TestCase.assertEquals(userEntidade.getPassword(), userEntidadeCadastrado.getPassword());
+         TestCase.assertNotNull(historicoCombustivelEntidadeCadastrado);
+         TestCase.assertEquals(historicoCombustivelEntidade.getRegiao(), historicoCombustivelEntidadeCadastrado.getRegiao());
+         TestCase.assertEquals(historicoCombustivelEntidade.getEstado(), historicoCombustivelEntidadeCadastrado.getEstado());
+         TestCase.assertEquals(historicoCombustivelEntidade.getMunicipio(), historicoCombustivelEntidadeCadastrado.getMunicipio());
+         TestCase.assertEquals(historicoCombustivelEntidade.getRevenda(), historicoCombustivelEntidadeCadastrado.getRevenda());
+         TestCase.assertEquals(historicoCombustivelEntidade.getInstalacao(), historicoCombustivelEntidadeCadastrado.getInstalacao());
+         TestCase.assertEquals(historicoCombustivelEntidade.getProduto(), historicoCombustivelEntidadeCadastrado.getProduto());
+         TestCase.assertEquals(historicoCombustivelEntidade.getData_coleta(), historicoCombustivelEntidadeCadastrado.getData_coleta());
+         TestCase.assertEquals(historicoCombustivelEntidade.getValor_compra(), historicoCombustivelEntidadeCadastrado.getValor_compra());
+         TestCase.assertEquals(historicoCombustivelEntidade.getValor_venda(), historicoCombustivelEntidadeCadastrado.getValor_venda());
+         TestCase.assertEquals(historicoCombustivelEntidade.getUnidade(), historicoCombustivelEntidadeCadastrado.getUnidade());
+         TestCase.assertEquals(historicoCombustivelEntidade.getBandeira(), historicoCombustivelEntidadeCadastrado.getBandeira());
          
     }
 }
