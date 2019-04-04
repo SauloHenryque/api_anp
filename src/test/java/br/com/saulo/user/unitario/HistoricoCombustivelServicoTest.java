@@ -1,20 +1,12 @@
 package br.com.saulo.user.unitario;
 
-import static org.junit.Assert.assertNotNull;
-
-import java.util.List;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.springframework.data.domain.Example;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import com.google.common.collect.Lists;
 
 import br.com.saulo.anp.entidades.HistoricoCombustivelEntidade;
 import br.com.saulo.anp.entidades.UserEntidade;
