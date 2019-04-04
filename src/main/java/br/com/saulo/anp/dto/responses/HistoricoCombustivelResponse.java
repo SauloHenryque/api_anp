@@ -2,6 +2,8 @@ package br.com.saulo.anp.dto.responses;
 
 
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.time.LocalDate;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -35,13 +37,13 @@ public class HistoricoCombustivelResponse implements Serializable{
     private String produto;
     
     @ApiModelProperty(value = "Data Coleta", position = 8)
-    private String data_coleta;
+    private LocalDate data_coleta;
     
     @ApiModelProperty(value = "Valor Compra", position = 9)
-    private String valor_compra;
+    private BigDecimal valor_compra;
     
     @ApiModelProperty(value = "Valor Venda", position = 10)
-    private String valor_venda;
+    private BigDecimal valor_venda;
     
     @ApiModelProperty(value = "Unidade", position = 11)
     private String unidade;

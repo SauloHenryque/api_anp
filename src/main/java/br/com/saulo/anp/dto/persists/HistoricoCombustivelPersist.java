@@ -1,6 +1,8 @@
 package br.com.saulo.anp.dto.persists;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.time.LocalDate;
 
 import javax.validation.constraints.NotNull;
 
@@ -40,13 +42,13 @@ public class HistoricoCombustivelPersist implements Serializable {
     
     @ApiModelProperty(value = "Data Coleta", position = 7)
     @NotNull(message = "Data Coleta não pode ser nulo")
-    private String data_coleta;
+    private LocalDate data_coleta;
     
     @ApiModelProperty(value = "Valor Compra", position = 8)
-    private String valor_compra;
+    private BigDecimal valor_compra;
     
     @ApiModelProperty(value = "Valor Venda", position = 9)
-    private String valor_venda;
+    private BigDecimal valor_venda;
     
     @ApiModelProperty(value = "Unidade", position = 10)
     @NotNull(message = "Unidadeo não pode ser nulo")

@@ -11,6 +11,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.springframework.data.domain.Example;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.google.common.collect.Lists;
@@ -20,7 +21,6 @@ import br.com.saulo.anp.exception.NotFoundException;
 import br.com.saulo.anp.repositorios.HistoricoCombustivelRepositorio;
 import br.com.saulo.anp.servicos.HistoricoCombustivelServico;
 import junit.framework.TestCase;
-import org.springframework.data.domain.Example;
 
 
 @RunWith(SpringRunner.class)
@@ -54,8 +54,8 @@ public class HistoricoCombustivelServicoTest {
     	 historicoCombustivelEntidadeNovo.setInstalacao("7890");
     	 historicoCombustivelEntidadeNovo.setProduto("DIESEL");
     	 historicoCombustivelEntidadeNovo.setData_coleta("03/01/2018");
-    	 historicoCombustivelEntidadeNovo.setValor_compra("3,218");
-    	 historicoCombustivelEntidadeNovo.setValor_venda("3,559");
+    	 historicoCombustivelEntidadeNovo.setValor_compra("3.218");
+    	 historicoCombustivelEntidadeNovo.setValor_venda("3,218");
     	 historicoCombustivelEntidadeNovo.setUnidade("R$ / litro");
     	 historicoCombustivelEntidadeNovo.setBandeira("PETROBRAS DISTRIBUIDORA S.A.");
     	  
@@ -78,8 +78,8 @@ public class HistoricoCombustivelServicoTest {
     	 historicoCombustivelEntidadeNovo.setInstalacao("7890");
     	 historicoCombustivelEntidadeNovo.setProduto("DIESEL");
     	 historicoCombustivelEntidadeNovo.setData_coleta("03/01/2018");
-    	 historicoCombustivelEntidadeNovo.setValor_compra("3,218");
-    	 historicoCombustivelEntidadeNovo.setValor_venda("3,559");
+    	 historicoCombustivelEntidadeNovo.setValor_compra("3.218");
+    	 historicoCombustivelEntidadeNovo.setValor_venda("3,218");
     	 historicoCombustivelEntidadeNovo.setUnidade("R$ / litro");
     	 historicoCombustivelEntidadeNovo.setBandeira("PETROBRAS DISTRIBUIDORA S.A.");
     	 
@@ -105,8 +105,8 @@ public class HistoricoCombustivelServicoTest {
    	 	historicoCombustivelEntidadeNovo.setInstalacao("7890");
    	 	historicoCombustivelEntidadeNovo.setProduto("DIESEL");
    	 	historicoCombustivelEntidadeNovo.setData_coleta("03/01/2018");
-   	 	historicoCombustivelEntidadeNovo.setValor_compra("3,218");
-   	 	historicoCombustivelEntidadeNovo.setValor_venda("3,559");
+   	 	historicoCombustivelEntidadeNovo.setValor_compra("3.218");
+   	 	historicoCombustivelEntidadeNovo.setValor_venda("3,218");
    	 	historicoCombustivelEntidadeNovo.setUnidade("R$ / litro");
    	 	historicoCombustivelEntidadeNovo.setBandeira("PETROBRAS DISTRIBUIDORA S.A.");
    	 

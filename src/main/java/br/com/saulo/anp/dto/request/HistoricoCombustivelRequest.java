@@ -29,7 +29,7 @@ public class HistoricoCombustivelRequest implements Serializable{
 	    @ApiModelProperty(value = "revenda", position = 5)
 	    private String revenda;
 	    
-	    @ApiModelProperty(value = "Instalação", position = 6)
+	    @ApiModelProperty(value = "Instalaçãoo", position = 6)
 	    private String instalacao;
 	    
 	    @ApiModelProperty(value = "Produto", position = 7)

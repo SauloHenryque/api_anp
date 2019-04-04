@@ -21,10 +21,11 @@ public class ArquivoCSV {
     
     private String valor_compra	= "Valor de Compra";
     
-    private String valor_venda	= "Valor de Venda";
+	private String valor_venda	= "Valor de Venda";
     
     private String unidade		= "Unidade de Medida";
     
     private String bandeira		= "Bandeira";
+
 
 }
