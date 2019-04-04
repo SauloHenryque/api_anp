@@ -1,13 +1,14 @@
 package br.com.saulo.anp.servicos;
 
-import static br.com.saulo.anp.exception.Exceptions.checkThrow;
-import static br.com.saulo.anp.exception.ExceptionsMessagesEnum.NOME_JA_CADASTRADO;
+import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.saulo.anp.entidades.ArquivoImportadoEntidade;
-import br.com.saulo.anp.repositorios.ArquivoImportadoRepositorio;
+import br.com.saulo.anp.entidades.HistoricoCombustivelRegiaoEntidade;
+import br.com.saulo.anp.repositorios.HistoricoCombustivelRegiaoRepositorio;
+import br.com.saulo.anp.repositorios.HistoricoCombustivelRepositorio;
 import lombok.Data;
 
 @Data
@@ -16,12 +17,19 @@ public class RelatorioServico {
 	
     
     @Autowired
-    private ArquivoImportadoRepositorio arquivoImportadoRepositorio;
+    private HistoricoCombustivelRepositorio historicoCombustivelRepositorio;
+    
+    @Autowired
+    private HistoricoCombustivelRegiaoRepositorio historicoCombustivelRegiaoRepositorio;
 
-	public ArquivoImportadoEntidade salvarArquivo(ArquivoImportadoEntidade arquivoImportadoEntidade) {
+	public List<Map<String, String>> mediaPrecoCombustivel() {
 		
-		checkThrow(arquivoImportadoRepositorio.existsByNome(arquivoImportadoEntidade.getNome()), NOME_JA_CADASTRADO);
-        return arquivoImportadoRepositorio.save(arquivoImportadoEntidade);
-
+		return historicoCombustivelRepositorio.findByAVGValorVenda();
+	}
+	
+	
+	public List<HistoricoCombustivelRegiaoEntidade> detalhePorRegiao() {
+		
+		return historicoCombustivelRegiaoRepositorio.findAll();
 	}
 }

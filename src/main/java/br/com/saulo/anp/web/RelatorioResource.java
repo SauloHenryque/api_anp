@@ -25,6 +25,10 @@ public class RelatorioResource {
 			return ResponseEntity.status(HttpStatus.OK).body(relatorioServico.mediaPrecoCombustivel());
 	    }
 		
+		@GetMapping("/detalhe-por-regiao")
+		public ResponseEntity<?> detalhePorRegiao() {
+			return ResponseEntity.status(HttpStatus.OK).body(relatorioServico.detalhePorRegiao());
+		}
 
 
 }
