@@ -13,5 +13,6 @@ public interface HistoricoCombustivelRegiaoRepositorio extends JpaRepository<His
 
 	@Query(value = "SELECT REGIAO FROM HISTORICO_COMBUSTIVEL  GROUP BY REGIAO", nativeQuery = true)
 	List<HistoricoCombustivelRegiaoEntidade> findAllByRegiao();
+
 	
 }

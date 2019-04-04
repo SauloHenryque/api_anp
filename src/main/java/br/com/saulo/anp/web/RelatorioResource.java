@@ -30,5 +30,11 @@ public class RelatorioResource {
 			return ResponseEntity.status(HttpStatus.OK).body(relatorioServico.detalhePorRegiao());
 		}
 
+		@GetMapping("/detalhe-por-destribuidora")
+		public ResponseEntity<?> detalhePorRevenda() {
+			return ResponseEntity.status(HttpStatus.OK).body(relatorioServico.detalhePorRevenda());
+		}
+		
+
 
 }

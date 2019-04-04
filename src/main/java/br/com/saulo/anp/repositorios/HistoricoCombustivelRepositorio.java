@@ -17,4 +17,7 @@ public interface HistoricoCombustivelRepositorio extends JpaRepository<Historico
 	@Query(value = "SELECT municipio,  AVG(VALOR_VENDA) AS media_venda FROM HISTORICO_COMBUSTIVEL  GROUP BY MUNICIPIO", nativeQuery = true)
 	List<Map<String, String>> findByAVGValorVenda();
 	
+	@Query(value = "SELECT  *  FROM HISTORICO_COMBUSTIVEL  ORDER BY REVENDA", nativeQuery = true)
+	List<HistoricoCombustivelEntidade> findAllByRevenda();
+	
 }

@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.saulo.anp.entidades.HistoricoCombustivelEntidade;
 import br.com.saulo.anp.entidades.HistoricoCombustivelRegiaoEntidade;
 import br.com.saulo.anp.repositorios.HistoricoCombustivelRegiaoRepositorio;
 import br.com.saulo.anp.repositorios.HistoricoCombustivelRepositorio;
@@ -31,5 +32,10 @@ public class RelatorioServico {
 	public List<HistoricoCombustivelRegiaoEntidade> detalhePorRegiao() {
 		
 		return historicoCombustivelRegiaoRepositorio.findAllByRegiao();
+	}
+	
+	public List<HistoricoCombustivelEntidade> detalhePorRevenda() {
+		
+		return historicoCombustivelRepositorio.findAllByRevenda();
 	}
 }
